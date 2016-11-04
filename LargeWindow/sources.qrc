@@ -1,0 +1,66 @@
+<RCC>
+    <qresource prefix="/style">
+        <file>style.css</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file alias="clock">icCars/01 - ICP.png</file>
+        <file alias="ship">icCars/02 - ICP.png</file>
+        <file alias="car_1">icCars/03 - ICP.png</file>
+        <file alias="loop">icCars/04 - ICP.png</file>
+        <file alias="car_10">icCars/05 - ICP.png</file>
+        <file alias="diagram">icCars/06ICP.png</file>
+        <file alias="car_2">icCars/07 - ICP.png</file>
+        <file alias="disc">icCars/08 - ICP.png</file>
+        <file alias="car_3">icCars/09 - ICP.png</file>
+        <file alias="car_4">icCars/10 - ICP.png</file>
+        <file alias="car_5">icCars/11 - ICP.png</file>
+        <file alias="car_6">icCars/12 - ICP.png</file>
+        <file alias="car_7">icCars/13 - ICP.png</file>
+        <file alias="car_8">icCars/14 - ICP.png</file>
+        <file alias="car_9">icCars/15 - ICP.png</file>
+        <file alias="button_green">icColor_Buttons/CreativeOrbs_1.png</file>
+        <file alias="button_dark">icColor_Buttons/CreativeOrbs_2.png</file>
+        <file alias="button_red">icColor_Buttons/CreativeOrbs_3.png</file>
+        <file alias="button_purple">icColor_Buttons/CreativeOrbs_4.png</file>
+        <file alias="button_blue">icColor_Buttons/CreativeOrbs_5.png</file>
+        <file alias="button_orange">icColor_Buttons/CreativeOrbs_6.png</file>
+        <file alias="button_yellow">icColor_Buttons/CreativeOrbs_7.png</file>
+        <file alias="fox">icRed/firefox_and_the_EYE_of_Sauron.png</file>
+        <file alias="apple">icRed/Glossy_Red_Apple_Logo.png</file>
+        <file alias="folder_fill">icRed/Red_gloss_art_folder.png</file>
+        <file alias="Burn_disc">icRed/Red_Gloss_Burn_Folder.png</file>
+        <file alias="folder">icRed/Red_Gloss_Dock_folder.png</file>
+        <file alias="folder_doc">icRed/Red_Gloss_Docs_Folder.png</file>
+        <file alias="folder_internet">icRed/Red_gloss_Downloads_Folder.png</file>
+        <file alias="No_access">icRed/Red_Gloss_forbidden_folder.png</file>
+        <file alias="folder_games">icRed/Red_Gloss_Games_Folder.png</file>
+        <file alias="internet">icRed/Red_Gloss_IE_Folder.png</file>
+        <file alias="music">icRed/Red_Gloss_Music_Folder.png</file>
+        <file alias="photo">icRed/Red_Gloss_Pics_Folder.png</file>
+        <file alias="periya">icRed/Red_gloss_PS_folder.png</file>
+        <file alias="lips">icRed/Red_Gloss_rock_n_roll_folder.png</file>
+        <file alias="X">icRed/Red_Gloss_X_Folder.png</file>
+        <file alias="Russian">icRed/Red_Rocketdock_Folder.png</file>
+        <file alias="music_2">icRed/Red_Winamp_Playlist_folder.png</file>
+        <file alias="video">icRed/Widows_Media_Player_Gloss.png</file>
+        <file alias="track">icRed/WinAmp_Gold_n_Red_by.png</file>
+        <file alias="Almaz">Other/Almaz.png</file>
+        <file alias="Android">OSi/Android.png</file>
+        <file alias="Apple">OSi/Apple.png</file>
+        <file alias="Linux">OSi/Linux.png</file>
+        <file alias="MacOSX">OSi/MacOSX.png</file>
+        <file alias="Windows">OSi/Windows.png</file>
+        <file alias="Disk">Other/disk.png</file>
+        <file alias="Folder">Other/folder.png</file>
+        <file alias="File+">Other/File+.png</file>
+    </qresource>
+    <qresource prefix="/lang">
+        <file alias="rus">LargeWindow_ru.qm</file>
+    </qresource>
+    <qresource prefix="/text_files">
+        <file alias="text">Text.txt</file>
+    </qresource>
+    <qresource prefix="/JPEG">
+        <file alias="Lambarginy">JPEG/Lambarginy.jpg</file>
+    </qresource>
+</RCC>

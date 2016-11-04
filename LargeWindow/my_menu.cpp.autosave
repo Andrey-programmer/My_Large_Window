@@ -1,0 +1,10 @@
+#include "my_menu.h"
+
+namespace WINDOW {
+My_Menu::My_Menu()
+{
+
+}
+
+}
+

@@ -1,0 +1,160 @@
+QFrame#dialogframe QPushButton {
+    padding:5px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #3873d9;
+    background-color: blue; /* background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,
+                                        stop: 0 , stop: 1 #356ccc);*/
+}
+
+
+ QFrame#dialogframe QPushButton#CancelButton {
+    padding:5px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #3873d9;
+    background-color: red; /* background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,
+                                        stop: 0 , stop: 1 #356ccc);*/
+  }
+
+QFrame#Car_Settings{
+    background-color:#A5F9AC;
+}
+
+QFrame#frameImage {
+    border: 3px ridge #2B2B2B;
+    padding: 20px;
+
+}
+
+/*QLabel
+{
+    border:2px solid #3873d9;
+    background-color: blue;
+    color: #fff;
+}*/
+
+QDialog#Auto_Dialog QTabBar::tab:selected
+{
+    padding:5px;
+    border: 1px ridge #2B2B2B;
+    border-bottom: 1px ridge #A5F9AC;
+    background-color:#A5F9AC;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+}
+
+QGroupBox#gpProperties
+{
+   border:2px solid #9FCA9B;
+   border-radius: 6px;
+   background-color: rgba(255, 255, 255, 140);
+   padding-top: 5px;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-bottom: 0px;
+   font-weight: bold;
+   font-size: 15px;
+   margin:9px 5px;/*тут устанавливаем заголовок QGroupBox по центру рамки 9px */
+}
+
+QGroupBox#gpProperties::title {
+   subcontrol-origin: margin;
+   subcontrol-position: top left; /* позиция заголовка групбокса*/
+   padding-bottom: 4px;
+   left: 20px; /*сдвигаем заголовок групбокса*/
+ }
+
+QGroupBox#autoPhoto
+{
+   font-weight: bold;
+   font-size: 15px;
+}
+
+QGroupBox#autoPhoto::title
+{
+    padding-bottom: 4px;
+    left: 15px; /*сдвигаем заголовок групбокса*/
+
+}
+
+QScrollArea#ScrollL
+{
+    background-color:#D6FCDA;
+    border:0 solid #9FCA9B;
+
+}
+
+QFrame#DataFrame
+{
+     background-color:#D6FCDA;
+}
+QFrame#PhotoFrame
+{
+     background-color:#D6FCDA;
+     padding: 0 0;
+}
+
+QFrame#GridLayout
+{
+    /* border:2px solid #9FCA9B;*/
+     padding: 0;
+     margin: 0;
+}
+
+QPushButton#Plus
+{
+    background: #A5F9AC;
+    margin-left: 5px;/*может вдавить кнопку если она в ячейке фиксированнной ширины*/
+    padding: 2px 2px 2px 2px;/* как ни странно тут кнопка расширяется 3px*/
+}
+
+QPushButton#SwimButton
+{
+    height: 40px;
+    width: 40px;
+    background-color: #0FFC6A;
+    color: black;
+}
+
+QPushButton#Shleif
+{
+    font-size: 8px;
+    padding: 2px 2px 2px 2px;
+}
+
+
+QFrame#mainFrame
+{
+    background-color: #EDF513;
+}
+
+QFrame#mainFrame:hover
+{
+    background-color: #3FFF19;
+}
+
+QFrame#Blue_window
+{
+    background-color: blue;
+}
+
+QToolButton#Apple
+{
+    background-color: blue;
+}
+
+QToolButton#Apple:hover
+{
+    background-color: #54F52F;
+}
+
+QProgressBar::chunk {
+/*здесь все пункты обязательны*/
+   /* background-color: #567FDF;
+    width: 20px;
+    margin: 0.5px;
+}*/
