@@ -97,6 +97,7 @@ Auto_Frame::Auto_Frame(QWidget *parent)://-конструктор класса
 
     lbl_Model = new QLabel(tr("Model"));
     cmb_Model = new QComboBox();
+    cmb_Model->setEditable(true);//Добавляем возможность добавления элементов
     lbl_Model->setBuddy(cmb_Model);
     plusModel = new QPushButton("+");
 

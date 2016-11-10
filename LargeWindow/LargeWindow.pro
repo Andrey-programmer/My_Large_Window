@@ -26,7 +26,8 @@ SOURCES += main.cpp\
            plus_dialog.cpp \
            systemtray.cpp \
            drawimage.cpp \
-           file_system.cpp
+           file_system.cpp \
+           table_multiplication.cpp
 
 
 HEADERS  += \
@@ -42,7 +43,8 @@ HEADERS  += \
            plus_dialog.h \
            systemtray.h \
            drawimage.h \
-           file_system.h
+           file_system.h \
+           table_multiplication.h
 
 
 FORMS    +=

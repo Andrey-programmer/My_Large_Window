@@ -208,20 +208,31 @@ SubWindows_3::SubWindows_3(QWidget *parent):
 
     QHBoxLayout *hLayoutMain = new QHBoxLayout();
     listWidget = new QListWidget();
-    setListWidget(listWidget);
+    setListWidget(listWidget);//моя функция формирования QListWidget
+//======Добавляем QToolbox===========
+    QVBoxLayout *vLayout9 = new QVBoxLayout();
+    QFrame *frameToolBox = new QFrame();
+    vLayout9->addWidget(frameToolBox);
+    tBox = new QToolBox();
+    vLayout9->addWidget(tBox);
+    setToolBox(tBox);//моя функция формирования QToolBox
+//================================
 
     QVBoxLayout *vLayout10 = new QVBoxLayout();
     hLayoutMain->addLayout(vLayout10);
+    hLayoutMain->addLayout(vLayout9);
 
-    pbPictogramm = new QPushButton(tr("Pictogramm"));
+    pbPictogramm = new QPushButton(tr("Pictogramm"));//кнопка запускающая режим пиктограмм
 
     vLayout10->addWidget(listWidget);
     vLayout10->addWidget(pbPictogramm);
+
 
     mainFrame->setLayout(hLayoutMain);
     setWidget(mainFrame);
 
     connect(pbPictogramm,SIGNAL(clicked(bool)),this,SLOT(slPictogramm()));
+   // connect(listWidget,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(slDClick()));
 
  }
 
@@ -235,10 +246,10 @@ void SubWindows_3::setListWidget(QListWidget *lwidget)
     QListWidgetItem *lwi = 0;
 
     foreach (QString str, list) {
-        lwi = new QListWidgetItem(str, lwidget);//каждый новый элемент автоматически добавляется в QListWidget
+        lwi = new QListWidgetItem(str, lwidget);//каждый элемент автоматически добавляется в QListWidget
         lwi->setFlags(Qt::ItemIsUserCheckable);//Добавляем флажки
+        lwi->setFlags(Qt::ItemIsUserCheckable|Qt::ItemIsEditable|Qt::ItemIsEnabled|Qt::ItemIsSelectable|Qt::ItemIsDragEnabled);// разрешаем редактировать
         lwi->setCheckState(Qt::Checked);//устанавливаем флажки в состояние (выбрано)
-        lwi->setFlags(Qt::ItemIsEditable|Qt::ItemIsEnabled|Qt::ItemIsSelectable|Qt::ItemIsDragEnabled);// разрешаем редактировать
         lwi->setIcon(QIcon(":/icons/"+str));
         qDebug()<<QString(":/icons/"+str);
    }
@@ -252,6 +263,20 @@ void SubWindows_3::slPictogramm()
     listWidget->setSortingEnabled(true);
     listWidget->sortItems(Qt::AscendingOrder);//сортировка по возрастанию
     listWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);//делаем возможным ПЕРЕКЛЮЧЕННЫЙ ВЫБОР (хз как работает, но лучше чем другие в пиктограмме)
+}
+void SubWindows_3::setToolBox(QToolBox *tBox)
+{
+    QStringList list;
+    list << "Windows" << "Linux" << "MacOSX" << "Android"<<"Apple"; //формируем данные
+    foreach(QString str, list)
+    {
+        QLabel *lbl = new QLabel(str,tBox); //вводим метку в качестве виджета
+        lbl->setAlignment(Qt::AlignCenter); // и размещаем её по центру
+        tBox->addItem(lbl,QPixmap(":/icons/"+str),str);
+    }
+    tBox->resize(100,80);
+    tBox->setToolTip(tr("QToolBox"));//подсказка
+
 }
 
 SubWindows_3::~SubWindows_3()
@@ -285,9 +310,20 @@ SubWindows_4::SubWindows_4(QWidget *parent):
     Hidden->setIcon(pix2);
     Hidden->setObjectName("Apple");
 
+
+    pbScreen = new QToolButton();
+    pbScreen->setText(tr("ScreenShot"));
+    pbScreen->setObjectName("Apple");
+
+    QHBoxLayout *hLayout10 = new QHBoxLayout();
+    hLayout10->addWidget(pbScreen,20,Qt::AlignLeft);
+    hLayout10->addWidget(Hidden,20,Qt::AlignRight);
+
+
+
     QVBoxLayout *vLayout10 = new QVBoxLayout();
     vLayout10->addWidget(Ok,0,Qt::AlignCenter);
-    vLayout10->addWidget(Hidden,20,Qt::AlignRight);
+    vLayout10->addLayout(hLayout10);
     mainFrame->setLayout(vLayout10);
 
     // Если хотим растянуть виджет на весь слой

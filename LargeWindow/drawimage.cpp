@@ -143,7 +143,7 @@ void DrawImage::slResizeImg()
   QImage imageTemp;
         if(cbResize->isChecked())
     {
-        imageTemp = image.scaled(image.width()/2,image.height()/2, Qt::IgnoreAspectRatio);
+        imageTemp = image.scaled(image.width()/2,image.height()/2, Qt::IgnoreAspectRatio);//изменение размеров(масштабирование)
         lblChangeImg->setFixedSize(imageTemp.size());
         lblChangeImg->setPixmap(QPixmap::fromImage(imageTemp));
     }

@@ -29,13 +29,6 @@ QFrame#frameImage {
 
 }
 
-/*QLabel
-{
-    border:2px solid #3873d9;
-    background-color: blue;
-    color: #fff;
-}*/
-
 QDialog#Auto_Dialog QTabBar::tab:selected
 {
     padding:5px;
@@ -145,12 +138,54 @@ QFrame#Blue_window
 QToolButton#Apple
 {
     background-color: blue;
+    color: white;
 }
 
 QToolButton#Apple:hover
 {
     background-color: #54F52F;
+    color: black;
 }
+/*==========Стили для таблицы=======*/
+/*для заголовков столбцов/строк*/
+QTableWidget#Table_Multiplication QHeaderView::section
+ {
+      background-color: blue;
+      font-size: 15px;
+      font-weight: bold;
+      color:#3FFF19;
+ }
+/*для заголовков на пересечении которых выбран элемент столбцов/строк*/
+QTableWidget#Table_Multiplication QHeaderView::section:checked
+  {
+       background-color: green;
+  }
+
+/*для ячеек*/
+QTableWidget#Table_Multiplication::item
+ {
+      font-size: 15px;
+      font-weight: bold;
+      background-color: #D8D8D8;
+      border:1 solid;
+ }
+
+/*для активных ячеек*/
+QTableWidget#Table_Multiplication::item:selected:active
+ {
+      font-size: 15px;
+      font-weight: bold;
+      background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,
+                                      stop: 0 #FF92BB, stop: 1 red);
+ }
+/*текст в ячейки данных*/
+QTableWidget#Table_Multiplication
+{
+     font-size: 15px;
+     font-weight: bold;
+}
+/*=======================================*/
+
 
 QProgressBar::chunk {
 /*здесь все пункты обязательны*/

@@ -14,10 +14,15 @@ private:
     QTreeWidgetItem *twgIt;
 
 public:
+    QString mainPath;
+
     File_System(const QString &path, QWidget *parent = 0);
     virtual ~File_System();
 
     QTreeWidgetItem* All_Directory(const QString &path, QTreeWidgetItem *itm);
+
+protected slots:
+    void slOpenFile(QTreeWidgetItem *item);
 };
 
 }

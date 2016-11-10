@@ -456,49 +456,7 @@ void My_MainWindow::slAllDirectory()
     actAllDirectory->setCheckable(true);
     actAllDirectory->setChecked(true);
     }
-
-//}
-
-
-/*
-    QTreeWidget *twg = new QTreeWidget(this);
-    QTreeWidgetItem *twgIt = new QTreeWidgetItem(twg);
-
-    twg->addTopLevelItem(All_Directory(str, twgIt));
-    twg->resize(250,300);
-    twg->show();*/
-
 }
-/*
-QTreeWidgetItem* My_MainWindow::All_Directory(const QString &path, QTreeWidgetItem *itm)
-{
-    QDir dir(path);
-
-    int check = 1;//счетчик директорий
-    foreach (QFileInfo temp, dir.entryInfoList()) {
-        if(check > 2)
-        {
-          qDebug() << "сработал перебор файлов";
-            QTreeWidgetItem *itm2 = new QTreeWidgetItem(itm);
-            itm2->setText(0,temp.fileName());
-            itm->addChild(itm2);
-            if(temp.isDir())
-                {
-                   itm2->setIcon(0,QIcon(":/icons/folder"));
-                   All_Directory(temp.absoluteFilePath(),itm2);
-                }
-            else
-            {
-                itm2->setIcon(0,QIcon(":/icons/File+"));
-            }
-
-
-        }
-        check++;
-    }
-    return itm;
-}
-*/
 //Слот копирования файлов
 void My_MainWindow::slCopyFile()
 {

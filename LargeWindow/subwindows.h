@@ -10,6 +10,7 @@
 #include <QAction>
 #include <QToolButton>
 #include <QListWidget>
+#include <QToolBox>
 
 
 namespace WINDOW {
@@ -66,8 +67,12 @@ private:
     QFrame *mainFrame;
     QListWidget *listWidget;
     QPushButton *pbPictogramm;
+    QToolBox *tBox;
+
+    bool check = true;
 
     void setListWidget(QListWidget *lwidget);
+    void setToolBox(QToolBox *tBox);
 
 protected slots:
     void slPictogramm();
@@ -90,6 +95,7 @@ private:
     QFrame *mainFrame;
     QToolButton *Ok;
     QToolButton *Hidden;
+    QToolButton *pbScreen;
     QPushButton *SwimButton;
     QPushButton *Shleif;
     QAction *actSwimButton;
