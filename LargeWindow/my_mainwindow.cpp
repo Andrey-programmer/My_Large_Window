@@ -5,6 +5,7 @@
 #include "auto_dialog.h"
 #include "myapplication.h"
 
+#include <QVBoxLayout>
 #include <QMenuBar>
 #include <QActionGroup>
 #include <QTabWidget>
@@ -21,6 +22,8 @@
 #include <QDateTime>
 #include <QImage>
 #include <QToolButton>
+#include <QDesktopWidget>
+#include <QScreen>
 
 
 /*
@@ -51,6 +54,13 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
  statusBar()->addWidget(lbl_Y);
  setMouseTracking(true);//в основной класс добавлять обязательно для отслеживания курсора
 //=================================================
+
+ QVBoxLayout *vLayout10 = new QVBoxLayout();
+ vLayout10->setMargin(0);//делаем отступы от рамки равными нулю
+ lbl_Screen = new QLabel();//Метка для размещения скриншота
+ vLayout10->addWidget(lbl_Screen,20,Qt::AlignBaseline);//Размещаем метку
+ mainFrame->setLayout(vLayout10);// натягиваем слой на рамку
+
  QIcon icon(":/icons/fox");
  setWindowIcon(icon);
  setWindowIconText("Fox");//хз зачем и где
@@ -164,7 +174,13 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
 
  }
 
-
+//================= ЭКШЕНЫ типа МОДЕЛЬ-ПРЕДСТАВЛЕНИЕ ====================
+ {
+     QAction *A = actLTT = new QAction(this);
+     A->setText(tr("List+Tree+Table"));
+     A->setIcon(QIcon(":/icons/loop"));
+     connect(A,SIGNAL(triggered(bool)),this, SLOT(slLTT()));
+ }
  //======================ЭКШЕНЫ ДЛЯ РАБОТЫ С ФАЙЛАМИ=====================================
  {
      QAction *A = actReadFromFile = new QAction(this);
@@ -223,6 +239,7 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
 
  }
 //========================================================================================================
+
     //===========Меню Файл=========//
   menuFile = menuBar()->addMenu(tr("&File"));
   menuFile->addAction(actReadFromFile);
@@ -258,6 +275,11 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
  //Меню с диалогами
  QMenu *dialogs = menuBar()->addMenu(tr("&Dialogs"));
  dialogs->addAction(actAuto);
+
+ //Меню Модель-Представление
+ menuModels = menuBar()->addMenu(tr("&Models"));
+ menuModels->addAction(actLTT);
+
 
 
  //Создание припаркованных окон
@@ -318,6 +340,7 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
  tbSubwindow->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);//Показывать не только иконку но и текст
 
  connect(SubWindow_4,SIGNAL(sigHidden()),this,SLOT(slTimerHiddenWindow()));
+ connect(SubWindow_4,SIGNAL(signScreenShot()),this,SLOT(slScreenSHot()));
 
  //===================Подключаем СИСТЕМНЫй ТРЕЙ===================
    trayIcon = new SystemTray(this);
@@ -638,6 +661,26 @@ void My_MainWindow::mouseMoveEvent(QMouseEvent *event)
     lbl_Y->setText("Y="+QString().setNum(event->y()));//переводим в строку текущую координату Y мыши
 }
 
+//Скриншот экрана
+void My_MainWindow::slScreenSHot()
+{
+    QDesktopWidget *desktop = MyApplication::desktop();
+    //QPixmap pic = QPixmap::grabWindow(desktop->screen()->winId());//Делаем сам скриншот
+    QScreen *screen = MyApplication::primaryScreen();//создаем объект скрина
+    QPixmap pic = screen->grabWindow(desktop->screen(0)->winId(),
+                                      0,0,desktop->geometry().width(),
+                                      desktop->geometry().height());//Делаем сам скриншот
+
+    lbl_Screen->clear();//Очищаем метку
+    lbl_Screen->setPixmap(pic);//Устанавливаем картинку в метку
+}
+
+
+void My_MainWindow::slLTT()
+{
+    LTT *lttWidget = new LTT();
+    lttWidget->show();
+}
 
 My_MainWindow::~My_MainWindow()
 {  qDebug()<<"Деструктор сработал";

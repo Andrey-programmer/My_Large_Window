@@ -345,11 +345,17 @@ SubWindows_4::SubWindows_4(QWidget *parent):
          connect(A,SIGNAL(triggered(bool)),this,SLOT(slHidden()));
      }
     connect(Hidden,SIGNAL(clicked(bool)),actHidden,SIGNAL(triggered(bool)));
+
+    {   auto *A = actScreenShot = new QAction();
+        connect(A,SIGNAL(triggered(bool)),this, SLOT(slScreenShot()));
+    }
+    connect(pbScreen,SIGNAL(clicked(bool)),actScreenShot,SIGNAL(triggered(bool)));
+
      //Вызываем функцию Qsrand только 1 раз и не в цикле иначе числа будут повторяться
      qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));//-генератор случайных чисел
 
-
 }
+
 //Слот плавающей кнопки:
 void SubWindows_4::slSwimButton()
 {
@@ -421,6 +427,11 @@ void SubWindows_4::slsetPozition()
 void SubWindows_4::slHidden()
 {
        emit sigHidden();
+}
+
+void SubWindows_4::slScreenShot()
+{
+    emit signScreenShot();
 }
 
 SubWindows_4::~SubWindows_4()

@@ -98,18 +98,23 @@ private:
     QToolButton *pbScreen;
     QPushButton *SwimButton;
     QPushButton *Shleif;
+
     QAction *actSwimButton;
     QAction *actHidden;
+    QAction *actScreenShot;
 
     bool swimFlag = true;//Флаг для создания бегающей кнопки. чтоб не размножалась
 
 signals:
     void sigHidden();
+    void signScreenShot();
 
 private slots:
     void slSwimButton();
     void slHidden();
     void slsetPozition();
+    void slScreenShot();
+
 /*
 protected:
     virtual void timerEvent(QTimer* );

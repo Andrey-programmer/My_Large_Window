@@ -27,7 +27,8 @@ SOURCES += main.cpp\
            systemtray.cpp \
            drawimage.cpp \
            file_system.cpp \
-           table_multiplication.cpp
+           table_multiplication.cpp \
+    model_view.cpp
 
 
 HEADERS  += \
@@ -44,7 +45,8 @@ HEADERS  += \
            systemtray.h \
            drawimage.h \
            file_system.h \
-           table_multiplication.h
+           table_multiplication.h \
+    model_view.h
 
 
 FORMS    +=

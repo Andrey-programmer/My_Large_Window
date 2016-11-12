@@ -5,6 +5,7 @@
 #include "systemtray.h"
 #include "drawimage.h"
 #include "file_system.h"
+#include "model_view.h"
 
 
 #include <QMainWindow>
@@ -54,6 +55,9 @@ private:
     QAction *actLanguage;
     QAction *actLanguageDefault;
 
+    QMenu *menuModels;
+    QAction *actLTT;
+
     QMenu *menuFile;
     QAction *actReadFromFile;
     QAction *actWriteToFile;
@@ -68,6 +72,8 @@ private:
 
     QLabel *lbl_X;
     QLabel *lbl_Y;
+
+    QLabel *lbl_Screen;
 
     SubWindows_1 *SubWindow_1;
     SubWindows_2 *SubWindow_2;
@@ -109,6 +115,11 @@ protected slots:
     void slTimerHiddenWindow();
 
     void slDoubleClick(QSystemTrayIcon::ActivationReason reason);
+
+    void slScreenSHot();//Скриншот
+
+    //Слоты работы с МОДЕЛЬ-ПРЕДСТАВЛЕНИЕ
+    void slLTT();
 
 };
 }
