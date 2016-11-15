@@ -187,6 +187,19 @@ QTableWidget#Table_Multiplication
 /*=======================================*/
 
 
+QListView#ListView_1::item:hover
+{
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0.6, y2: 0.5,
+    stop: 0 green, stop: 0.5 red, stop: 1 blue);
+   /* stop: 0.7 #D8D8D8, stop: 1.0 #FF92BB);*/
+    color: white;
+}
+
+QListView#ListView_1::item:selected
+{
+    background: #4FA330;
+}
+
 QProgressBar::chunk {
 /*здесь все пункты обязательны*/
    /* background-color: #567FDF;

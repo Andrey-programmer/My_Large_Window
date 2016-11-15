@@ -22,6 +22,17 @@ public:
 
 };
 
+
+class StdItemModel:public QTreeView
+{
+    Q_OBJECT
+
+public:
+    StdItemModel(QWidget *parent = 0);
+    virtual ~StdItemModel();
+
+};
+
 }
 
 

@@ -181,6 +181,13 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
      A->setIcon(QIcon(":/icons/loop"));
      connect(A,SIGNAL(triggered(bool)),this, SLOT(slLTT()));
  }
+
+ {
+     QAction *A = actStdItemModel = new QAction(this);
+     A->setText(tr("StdItemModel"));
+     A->setIcon(QIcon(":/icons/folder_doc"));
+     connect(A,SIGNAL(triggered(bool)),this, SLOT(slStdItemModel()));
+ }
  //======================ЭКШЕНЫ ДЛЯ РАБОТЫ С ФАЙЛАМИ=====================================
  {
      QAction *A = actReadFromFile = new QAction(this);
@@ -276,13 +283,7 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
  QMenu *dialogs = menuBar()->addMenu(tr("&Dialogs"));
  dialogs->addAction(actAuto);
 
- //Меню Модель-Представление
- menuModels = menuBar()->addMenu(tr("&Models"));
- menuModels->addAction(actLTT);
-
-
-
- //Создание припаркованных окон
+  //Создание припаркованных окон
  //--------------------------------------------------
  QMenu *SubWindow = menuBar()->addMenu(tr("&SubWindows"));
 
@@ -341,6 +342,12 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
 
  connect(SubWindow_4,SIGNAL(sigHidden()),this,SLOT(slTimerHiddenWindow()));
  connect(SubWindow_4,SIGNAL(signScreenShot()),this,SLOT(slScreenSHot()));
+
+ //======== Меню Модель-Представление==========================
+ menuModels = menuBar()->addMenu(tr("&Models"));
+ menuModels->addAction(actLTT);
+ menuModels->addAction(actStdItemModel);
+
 
  //===================Подключаем СИСТЕМНЫй ТРЕЙ===================
    trayIcon = new SystemTray(this);
@@ -680,6 +687,12 @@ void My_MainWindow::slLTT()
 {
     LTT *lttWidget = new LTT();
     lttWidget->show();
+}
+
+void My_MainWindow::slStdItemModel()
+{
+     StdItemModel *stdItemModelWidget = new StdItemModel();
+     stdItemModelWidget->show();
 }
 
 My_MainWindow::~My_MainWindow()
