@@ -49,8 +49,8 @@ StdItemModel::StdItemModel(QWidget *parent):
 {
 
     qDebug()<<"Сработал StdItemModel";
-    QStandardItemModel *model = new QStandardItemModel(5,3);//загоняем модель данных 5x3
-    for(int Row = 0; Row < 5; Row++)//перебираем главные строки первого столбца
+    QStandardItemModel *model = new QStandardItemModel(5,4);//загоняем модель данных 5x3
+    for(int Row = 1; Row < 5; Row++)//перебираем главные строки первого столбца
     {
         QModelIndex index = model->index(Row,0);//присваиваем индексы
         model->setData(index,"item"+QString::number(Row+1));//заполняем строки
@@ -70,7 +70,6 @@ StdItemModel::StdItemModel(QWidget *parent):
 
     }
    setModel(model);
-
 }
 
 
@@ -80,6 +79,41 @@ StdItemModel::~StdItemModel()
 }
 
 
+File_Model::File_Model(QWidget *parent):
+    QWidget(parent)
+{
+    QSplitter *splitter = new QSplitter(Qt::Horizontal);//объявляем разделитель
+
+    model = new QFileSystemModel();
+    model->setRootPath(QDir::rootPath());//загоняем в модель корневой путь по которой она должна раскрываться
+
+    tree = new QTreeView();//Представление деревом
+    tree->setModel(model);
+
+    table = new QTableView();//Представление таблицей
+    table->setModel(model);
+
+    splitter->addWidget(tree);
+    splitter->addWidget(table);
+
+    QHBoxLayout *hLayout10 = new QHBoxLayout();
+    hLayout10->addWidget(splitter);
+    setLayout(hLayout10);
+
+    setWindowTitle(tr("File_System"));
+
+    connect(tree,SIGNAL(activated(QModelIndex)),this,SLOT(slOpenFile(QModelIndex)));
+}
+
+void File_Model::slOpenFile(QModelIndex index)
+{
+    QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));
+}
+
+File_Model::~File_Model()
+{
+
+}
 
 
 }

@@ -33,6 +33,23 @@ public:
 
 };
 
+
+class File_Model:public QWidget
+{
+    Q_OBJECT
+
+private:
+    QTreeView *tree;
+    QFileSystemModel *model;
+    QTableView *table;
+
+public:
+    File_Model(QWidget *parent = 0);
+    virtual ~File_Model();
+
+protected slots:
+    void slOpenFile(QModelIndex index);
+};
 }
 
 

@@ -58,6 +58,7 @@ private:
     QMenu *menuModels;
     QAction *actLTT;
     QAction *actStdItemModel;
+    QAction *actFile_System;
 
     QMenu *menuFile;
     QAction *actReadFromFile;
@@ -122,6 +123,7 @@ protected slots:
     //Слоты работы с МОДЕЛЬ-ПРЕДСТАВЛЕНИЕ
     void slLTT();
     void slStdItemModel();
+    void slFile_System();
 
 };
 }

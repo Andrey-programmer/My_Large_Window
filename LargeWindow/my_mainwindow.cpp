@@ -188,6 +188,13 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
      A->setIcon(QIcon(":/icons/folder_doc"));
      connect(A,SIGNAL(triggered(bool)),this, SLOT(slStdItemModel()));
  }
+
+ {
+     QAction *A = actFile_System = new QAction(this);
+     A->setText(tr("File System"));
+     A->setIcon(QIcon(":/icons/File_Tree"));
+     connect(A,SIGNAL(triggered(bool)),this, SLOT(slFile_System()));
+ }
  //======================ЭКШЕНЫ ДЛЯ РАБОТЫ С ФАЙЛАМИ=====================================
  {
      QAction *A = actReadFromFile = new QAction(this);
@@ -347,6 +354,7 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
  menuModels = menuBar()->addMenu(tr("&Models"));
  menuModels->addAction(actLTT);
  menuModels->addAction(actStdItemModel);
+ menuModels->addAction(actFile_System);
 
 
  //===================Подключаем СИСТЕМНЫй ТРЕЙ===================
@@ -522,7 +530,7 @@ void My_MainWindow::slBinarFileWrite()
     {
         QDataStream stream(&file);
         stream.setVersion(QDataStream::Qt_5_7);//обизательно прописываем версию создания бинарного потока
-        stream << QImage(QFileDialog::getOpenFileName(0,tr("Select page"),"","*.png *.ico"));
+        stream << QImage(QFileDialog::getOpenFileName(0,tr("Select page"),"",QString("Small conteiners(*.png *.ico) ;; JPEG containers(*.jpg *.jpeg)")));
         if(stream.status() != QDataStream::Ok)
         {
             statusBar()->showMessage(tr("Error of .bin!!!"));
@@ -682,7 +690,7 @@ void My_MainWindow::slScreenSHot()
     lbl_Screen->setPixmap(pic);//Устанавливаем картинку в метку
 }
 
-
+//=================== Слоты работы с моделями =============================
 void My_MainWindow::slLTT()
 {
     LTT *lttWidget = new LTT();
@@ -693,6 +701,13 @@ void My_MainWindow::slStdItemModel()
 {
      StdItemModel *stdItemModelWidget = new StdItemModel();
      stdItemModelWidget->show();
+}
+
+
+void My_MainWindow::slFile_System()
+{
+    File_Model *fileSystem = new File_Model();
+    fileSystem->show();
 }
 
 My_MainWindow::~My_MainWindow()

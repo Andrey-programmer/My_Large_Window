@@ -53,6 +53,8 @@
         <file alias="Disk">Other/disk.png</file>
         <file alias="Folder">Other/folder.png</file>
         <file alias="File+">Other/File+.png</file>
+        <file alias="File_System">Other/File_System.png</file>
+        <file alias="File_Tree">Other/File SYstem.png</file>
     </qresource>
     <qresource prefix="/lang">
         <file alias="rus">LargeWindow_ru.qm</file>
