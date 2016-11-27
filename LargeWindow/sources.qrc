@@ -55,6 +55,7 @@
         <file alias="File+">Other/File+.png</file>
         <file alias="File_System">Other/File_System.png</file>
         <file alias="File_Tree">Other/File SYstem.png</file>
+        <file alias="Red_ligntning">Other/Red_lightning.png</file>
     </qresource>
     <qresource prefix="/lang">
         <file alias="rus">LargeWindow_ru.qm</file>

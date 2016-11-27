@@ -49,6 +49,8 @@ public:
 
 protected slots:
     void slOpenFile(QModelIndex index);
+    void slOpenDirTable(QModelIndex index);
+    void slTreeDoubleClick(QModelIndex index);
 };
 }
 

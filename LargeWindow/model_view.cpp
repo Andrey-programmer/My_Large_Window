@@ -89,10 +89,18 @@ File_Model::File_Model(QWidget *parent):
 
     tree = new QTreeView();//Представление деревом
     tree->setModel(model);
+    tree->setColumnWidth(0,250);// Задаём Ширину первой колонки
 
     table = new QTableView();//Представление таблицей
     table->setModel(model);
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);//Растягиваем столбец под содержимое
 
+    //Устанавливаем связь между выбранными элементами  дерева и таблицы
+    QItemSelectionModel *selection = new QItemSelectionModel(model);
+    tree->setSelectionModel(selection);
+    table->setSelectionModel(selection);
+
+//помещаем в разделитель виджеты
     splitter->addWidget(tree);
     splitter->addWidget(table);
 
@@ -102,12 +110,45 @@ File_Model::File_Model(QWidget *parent):
 
     setWindowTitle(tr("File_System"));
 
-    connect(tree,SIGNAL(activated(QModelIndex)),this,SLOT(slOpenFile(QModelIndex)));
+    connect(tree,SIGNAL(activated(QModelIndex)),this,SLOT(slOpenFile(QModelIndex)));//Слот открытия файлов в дереве
+    connect(table,SIGNAL(activated(QModelIndex)),this,SLOT(slOpenDirTable(QModelIndex)));//открытие поддиректории в таблице при нажатии элемента
+    connect(tree,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(slTreeDoubleClick(QModelIndex)));//При двойном клике элемента дерева раскрывается таблица
+    connect(table,SIGNAL(doubleClicked(QModelIndex)),tree,SLOT(expand(QModelIndex)));//При выборе элемента таблицы выбирается элемент дерева
+    connect(table,SIGNAL(doubleClicked(QModelIndex)),tree,SIGNAL(activated(QModelIndex)));//чтобы при выборе элемента он открывался
 }
 
 void File_Model::slOpenFile(QModelIndex index)
 {
-    QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));
+    if(!model->fileInfo(index).isDir())//Если файл - не директория
+    {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(model->filePath(index)));//тогда открываем его
+         table->setRootIndex(index.parent());//и в таблице раскрываем папку (родителя) в которой он находится
+    }
+}
+
+void File_Model::slOpenDirTable(QModelIndex index)
+{
+    if(model->fileInfo(index).isDir())//Если выбрана папка,
+       table->setRootIndex(index);//то раскрываем её
+
+}
+
+void File_Model::slTreeDoubleClick(QModelIndex index)
+{
+    if(!tree->isExpanded(index))//Если элемент был закрыт(то он раскрывается и...)
+        table->activated(index);//таблица перегружается на этот элемент
+    else
+    {
+        if(index.parent().row()<0) table->reset();/*При нажатии диска
+                    индекс родителя получается с отрицательной строкой
+                    поэтому перезагружаем исходное состояние таблицы */
+        else
+        table->activated(index.parent());//Если при двойном клике элемент сворачивается
+                                         //то в таблице открываем элемент на порядок выше
+    }
+    qDebug()<<"Индекс элемента"<<index;
+    qDebug()<<"Индекс родителя"<<index.parent();
+    qDebug()<<"==============";
 }
 
 File_Model::~File_Model()
