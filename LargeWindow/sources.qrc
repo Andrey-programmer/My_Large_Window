@@ -56,6 +56,9 @@
         <file alias="File_System">Other/File_System.png</file>
         <file alias="File_Tree">Other/File SYstem.png</file>
         <file alias="Red_ligntning">Other/Red_lightning.png</file>
+        <file alias="Copy_files">Other/Copy files.png</file>
+        <file alias="Total_ Commander">Other/TC.png</file>
+        <file alias="Delete">Other/Delete.png</file>
     </qresource>
     <qresource prefix="/lang">
         <file alias="rus">LargeWindow_ru.qm</file>

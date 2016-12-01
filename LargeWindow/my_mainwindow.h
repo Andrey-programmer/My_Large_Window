@@ -59,6 +59,7 @@ private:
     QAction *actLTT;
     QAction *actStdItemModel;
     QAction *actFile_System;
+    QAction *actTotal_Commander;
 
     QMenu *menuFile;
     QAction *actReadFromFile;
@@ -124,6 +125,7 @@ protected slots:
     void slLTT();
     void slStdItemModel();
     void slFile_System();
+    void slTotal_Commander();
 
 };
 }

@@ -52,7 +52,41 @@ protected slots:
     void slOpenDirTable(QModelIndex index);
     void slTreeDoubleClick(QModelIndex index);
 };
-}
 
+
+class Total_Commander:public QWidget
+{
+    Q_OBJECT
+
+private:
+    QListView *listMaster;
+    QListView *listSlave;
+
+    QPushButton *btnCopy;
+    QAction *actCopy;
+
+    QPushButton *btnDel;
+    QAction *actDel;
+
+    QFileSystemModel *model;
+
+    QString Path;
+    QString Path_2;
+
+    void copyFile(QString Path, QString Path_2);
+    void deleteFiles(QString Path);
+
+public:
+    Total_Commander(QWidget *parent = 0);
+    virtual ~Total_Commander();
+
+protected slots:
+    void slDoubleClick(QModelIndex index);
+    void slCopyFiles();
+    void slDelFiles();
+};
+
+
+}//namespace WINDOW
 
 #endif // LTT_H

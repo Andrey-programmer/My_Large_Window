@@ -195,6 +195,13 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
      A->setIcon(QIcon(":/icons/File_Tree"));
      connect(A,SIGNAL(triggered(bool)),this, SLOT(slFile_System()));
  }
+
+ {
+     QAction *A = actTotal_Commander = new QAction(this);
+     A->setText(tr("Total Commander"));
+     A->setIcon(QIcon(":/icons/Total_ Commander"));
+     connect(A,SIGNAL(triggered(bool)),this, SLOT(slTotal_Commander()));
+ }
  //======================ЭКШЕНЫ ДЛЯ РАБОТЫ С ФАЙЛАМИ=====================================
  {
      QAction *A = actReadFromFile = new QAction(this);
@@ -355,6 +362,7 @@ My_MainWindow::My_MainWindow(QWidget *parent) : QMainWindow(parent)
  menuModels->addAction(actLTT);
  menuModels->addAction(actStdItemModel);
  menuModels->addAction(actFile_System);
+ menuModels->addAction(actTotal_Commander);
 
 
  //===================Подключаем СИСТЕМНЫй ТРЕЙ===================
@@ -708,6 +716,12 @@ void My_MainWindow::slFile_System()
 {
     File_Model *fileSystem = new File_Model();
     fileSystem->show();
+}
+
+void My_MainWindow::slTotal_Commander()
+{
+    Total_Commander *commander = new Total_Commander();
+    commander->show();
 }
 
 My_MainWindow::~My_MainWindow()

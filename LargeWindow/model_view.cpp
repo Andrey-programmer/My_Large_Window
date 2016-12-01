@@ -156,6 +156,142 @@ File_Model::~File_Model()
 
 }
 
+Total_Commander::Total_Commander(QWidget *parent):
+    QWidget(parent)
+{
+    model = new QFileSystemModel(this);
+    model->setFilter(QDir::AllEntries);// отображаем всё
+    model->setRootPath("");// устанавливаем корневой путь
+
+    QVBoxLayout *vLayoutMain = new QVBoxLayout(this);
+    QSplitter *splitter = new QSplitter(Qt::Horizontal);
+    QHBoxLayout *hLayout10 = new QHBoxLayout();
+
+    listMaster = new QListView();
+    listSlave = new QListView();
+    listMaster->setMinimumWidth(200);
+    listSlave->setMinimumWidth(200);
+    listMaster->setModel(model);
+    listSlave->setModel(model);
+
+    splitter->addWidget(listMaster);
+    splitter->addWidget(listSlave);
+    btnCopy = new QPushButton(QIcon (":/icons/Copy_files"),tr("Copy"));
+    btnDel = new QPushButton(QIcon(":/icons/Delete"),tr("Delete"));
+
+
+    hLayout10->addWidget(btnCopy,0,Qt::AlignHCenter);
+    hLayout10->addWidget(btnDel,0,Qt::AlignCenter);
+    vLayoutMain->addWidget(splitter);
+    vLayoutMain->addLayout(hLayout10);
+
+
+    setWindowTitle(tr("Total Commander"));
+    connect(listMaster,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(slDoubleClick(QModelIndex)));
+    connect(listSlave,SIGNAL(doubleClicked(QModelIndex)),this,SLOT(slDoubleClick(QModelIndex)));
+
+    {//Экш копирования файла в директории
+        auto *A = actCopy = new QAction();
+        connect(A,SIGNAL(triggered(bool)),this,SLOT(slCopyFiles()));
+    }
+    connect(btnCopy,SIGNAL(clicked(bool)),actCopy,SIGNAL(triggered(bool)));
+
+    {//Экш копирования файла в директории
+        auto *A = actDel = new QAction();
+        connect(A,SIGNAL(triggered(bool)),this,SLOT(slDelFiles()));
+    }
+    connect(btnDel,SIGNAL(clicked(bool)),actDel,SIGNAL(triggered(bool)));
+}
+
+void Total_Commander::slDoubleClick(QModelIndex index)
+{
+    QListView *listView = (QListView*)sender();//Метод получает указатель на объект, посылающий данный сигнал
+    QFileInfo fileinfo = model->fileInfo(index);
+
+    if(fileinfo.fileName() == "..")
+    {
+        QDir dir = fileinfo.dir();
+        dir.cdUp();//переходим в родительскую папку, т.е на уровень выше
+        listView->setRootIndex(model->index(dir.absolutePath())); //устанавливаем корневую директорию в этом листе
+    }
+    else if(fileinfo.fileName() == ".")
+    {
+        listView->setRootIndex(model->index(""));//Переходим в корневую папку
+    }
+    else if(fileinfo.isDir())// Если элемент- папка
+    {
+        listView->setRootIndex(index);//раскрываем выбранный элемент
+    }
+
 
 }
+
+void Total_Commander::copyFile(QString Path, QString Path_2)
+{
+    QFileInfo fileInfo(Path);
+    if(fileInfo.isFile())//если выбран файл
+    {
+         Path_2 += "/" + fileInfo.fileName();//формируем новую директорию
+         QFile::copy(Path,Path_2);//копируем файл
+    }
+
+    if(fileInfo.isDir())//Если выбрана папка
+    {
+        QDir(Path_2).mkdir(fileInfo.fileName());//создаём новую директорию и присваиваем её к subir
+        QString subDir = Path_2+"/"+fileInfo.fileName();//поддиректория (путь)
+        qDebug() << "поддиректория " << subDir;
+
+        //ФИЛЬТР В QDIR ДОБАВЛЯЕМ ОБЯЗАТЕЛЬНО!!!
+        foreach(QFileInfo infoFile, QDir(Path).entryInfoList(QDir::Files|QDir::Dirs|QDir::NoDotAndDotDot,QDir::Name|QDir::DirsFirst))//Гуляем по папке
+        {   qDebug() << "абсолютный путь " << infoFile.absoluteFilePath();
+            copyFile(infoFile.absoluteFilePath(),subDir);
+
+
+        }
+
+    }
+
+}
+
+void Total_Commander::slCopyFiles()
+{
+    QString Path = model->fileInfo(listMaster->currentIndex()).absoluteFilePath();//Путь исходный
+    QString Path_2 = model->fileInfo(listSlave->rootIndex()).absoluteFilePath();//Путь загрузки
+
+    qDebug() << model->fileInfo(listSlave->rootIndex()).absoluteFilePath() + "/" + model->fileInfo(listMaster->currentIndex()).fileName();
+
+    copyFile(Path, Path_2);
+}
+
+void Total_Commander::slDelFiles()
+{
+    QString Path = model->fileInfo(listSlave->currentIndex()).absoluteFilePath();
+    deleteFiles(Path);
+}
+
+void Total_Commander::deleteFiles(QString Path)
+{
+    QFileInfo fileInfo(Path);
+    if(fileInfo.isFile())
+    {
+        QFile(Path).remove();
+            QDir(Path).rmdir(Path);
+    }
+
+      if(fileInfo.isDir())//Если выбрана папка
+    {
+        foreach(QFileInfo infoFile, QDir(Path).entryInfoList(QDir::Files|QDir::Dirs|QDir::NoDotAndDotDot,QDir::Name|QDir::DirsFirst))
+        {
+            deleteFiles(infoFile.absoluteFilePath());//удаляем все вложенные файлы рекурсивно
+        }
+        QDir(fileInfo.absoluteFilePath()).rmdir(fileInfo.absoluteFilePath());//удаляем саму папку
+    }
+}
+
+Total_Commander::~Total_Commander()
+{
+
+}
+
+}//namespace WINDOW
 
